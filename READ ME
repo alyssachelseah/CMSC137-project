@@ -1,0 +1,8 @@
+Create Server:
+	
+	java Chat 1 <port number>
+
+Create Client:
+
+	java Chat 2 <port number> <ip address>
+	
