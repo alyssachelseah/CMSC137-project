@@ -1,6 +1,7 @@
 package main;
 
-import java.awt.Graphics;
+import java.awt.*;
+import java.util.LinkedList;
 
 public abstract class GameObject {
 
@@ -14,8 +15,9 @@ public abstract class GameObject {
 		this.id = id;
 	}
 	
-	public abstract void tick();
+	public abstract void tick(LinkedList<GameObject> object);
 	public abstract void render(Graphics g);
+	public abstract Rectangle getBounds();
 	
 	public void setX(int x) {
 		this.x = x;
@@ -23,7 +25,7 @@ public abstract class GameObject {
 	
 	public void setY(int y) {
 		this.y = y;
-	}
+	}	
 	
 	public void setId(ID id) {
 		this.id = id;

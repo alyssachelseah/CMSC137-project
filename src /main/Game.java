@@ -13,6 +13,8 @@ public class Game extends Canvas implements Runnable{
 	
 	private Random r;
 	private Handler handler;
+	private HUD hud;
+	private Spawn spawner;
 	
 	public Game(){
 		handler = new Handler();
@@ -20,29 +22,20 @@ public class Game extends Canvas implements Runnable{
 		
 		new Window(WIDTH, HEIGHT, "Alien Cows", this);
 	
-		
+		hud = new HUD();
+		spawner = new Spawn(handler, hud);
 		r = new Random();
+//		handler.addObject(new Player(r.nextInt(WIDTH), r.nextInt(HEIGHT), ID.Player));
+		handler.addObject(new Player(400, 600, ID.Player, handler));
+		handler.addObject(new Player(600, 600, ID.Player2, handler));
 		
-//		for(int i = 0; i < 50; i++) {
-//			handler.addObject(new Player(r.nextInt(WIDTH), r.nextInt(HEIGHT), ID.Player));
-//		}
-		handler.addObject(new Player(400, 600, ID.Player));
-		handler.addObject(new Player(600, 600, ID.Player2));
-		handler.addObject(new BasicEnemy(30, 50, ID.BasicEnemy));
-		handler.addObject(new BasicEnemy(100, 50, ID.BasicEnemy));
-		handler.addObject(new BasicEnemy(170, 50, ID.BasicEnemy));
-		handler.addObject(new BasicEnemy(240, 50, ID.BasicEnemy));
-		handler.addObject(new BasicEnemy(310, 50, ID.BasicEnemy));
-		handler.addObject(new BasicEnemy(380, 50, ID.BasicEnemy));
-		handler.addObject(new BasicEnemy(450, 50, ID.BasicEnemy));
-		handler.addObject(new BasicEnemy(520, 50, ID.BasicEnemy));
-		handler.addObject(new BasicEnemy(590, 50, ID.BasicEnemy));
-		handler.addObject(new BasicEnemy(660, 50, ID.BasicEnemy));
-		handler.addObject(new BasicEnemy(730, 50, ID.BasicEnemy));
-		handler.addObject(new BasicEnemy(800, 50, ID.BasicEnemy));
-		handler.addObject(new BasicEnemy(870, 50, ID.BasicEnemy));
-		handler.addObject(new BasicEnemy(940, 50, ID.BasicEnemy));
+		//add enemies
+		handler.addObject(new BossEnemy((Game.WIDTH / 2) - 48, -100, ID.BossEnemy, handler));
 		
+		for(int i = 0; i < 50; i++) {
+			int space = i * 70;
+			handler.addObject(new BasicEnemy(30 + space, 50, ID.BasicEnemy, handler));
+		}
 	}
 	
 	
@@ -62,6 +55,7 @@ public class Game extends Canvas implements Runnable{
 	}
 	
 	public void run() {
+		this.requestFocus();
 		long lastTime = System.nanoTime();
 		double amountOfTicks = 60.0;
 		double ns = 1000000000/amountOfTicks;
@@ -91,6 +85,8 @@ public class Game extends Canvas implements Runnable{
 	
 	private void tick() {
 		handler.tick();
+		hud.tick();
+		spawner.tick();
 	}
 	
 	private void render() {
@@ -106,6 +102,7 @@ public class Game extends Canvas implements Runnable{
 		g.fillRect(0, 0, WIDTH, HEIGHT);
 		
 		handler.render(g);
+		hud.render(g);;
 		
 		g.dispose();
 		bs.show();
@@ -124,4 +121,7 @@ public class Game extends Canvas implements Runnable{
 		
 	}
 	
+	public Handler getHandler() {
+		return this.handler;
+	}
 }

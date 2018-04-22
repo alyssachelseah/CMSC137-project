@@ -3,16 +3,17 @@ package main;
 import java.awt.*;
 import java.util.LinkedList;
 
-public class BasicEnemy extends GameObject{
+public class Enemy3 extends GameObject{
 
 	private Handler handler;
+	private int health = 3;
 	
-	public BasicEnemy(int x, int y, ID id, Handler handler) {
+	public Enemy3(int x, int y, ID id, Handler handler) {
 		super(x, y, id);
 		this.handler = handler;
 		
 		velX = 1;
-		velY = 1;
+		velY = 3;
 	}
 	
 	public Rectangle getBounds() {
@@ -28,7 +29,15 @@ public class BasicEnemy extends GameObject{
 	}
 	
 	public void render(Graphics g) {
-		g.setColor(Color.yellow);
+		g.setColor(Color.white);
 		g.fillRect(x, y, 40, 40);
+	}
+	
+	public void reduceHealth() {
+		health-=1;
+	}
+	
+	public int getHealth() {
+		return health;
 	}
 }
