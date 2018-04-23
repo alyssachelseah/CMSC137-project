@@ -3,11 +3,13 @@ package main;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
+
 public class Window extends Canvas{
 	public CardLayout cardLayout;
 	public Game gamePanel;
 	public MenuPanel menuPanel;
 	public JPanel mainPanel;
+	public InstructionPanel instructionPanel;
 
 	public static final String GAME = "GAME";
 	public static final String INSTRUCTION = "INSTRUCTION";
@@ -34,9 +36,13 @@ public class Window extends Canvas{
 		private JPanel createMainPanel(Game game) {
 			cardLayout = new CardLayout();
 			mainPanel = new JPanel(cardLayout);
+			
+			menuPanel = new MenuPanel();
+			instructionPanel = new InstructionPanel();
 
 			menuPanel = new MenuPanel();
 			mainPanel.add(menuPanel, MENU);
+			//mainPanel.add(instructionPanel, INSTRUCTION);
 		
 
 			menuPanel.getStartButton().addActionListener(new ActionListener () {
@@ -50,6 +56,13 @@ public class Window extends Canvas{
 				@Override
 				public void actionPerformed(ActionEvent ae) {
 					game.start();
+				}
+			});
+			
+			instructionPanel.getBackButton().addActionListener(new ActionListener () {
+				@Override
+				public void actionPerformed(ActionEvent ae) {
+					cardLayout.show(mainPanel, MENU);
 				}
 			});
 			
