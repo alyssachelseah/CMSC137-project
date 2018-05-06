@@ -1,10 +1,22 @@
 package main;
-import javax.swing.*;
-import java.awt.*;
 
-import java.io.*;
+import javax.swing.JPanel;
+import javax.swing.JLabel;
+import javax.swing.JButton;
+import java.awt.Dimension;
 
-public class InstructionPanel extends JPanel{
+import java.awt.Font;
+import java.awt.GraphicsEnvironment;
+import java.awt.FontFormatException;
+
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.awt.Color;
+
+import java.io.IOException;
+import java.io.File;
+
+public class InstructionPanel extends JPanel {
 	private JLabel header;
 	private JButton backButton;
 	private JPanel topPanel;
@@ -14,7 +26,7 @@ public class InstructionPanel extends JPanel{
 	private JLabel objective;
 
 	public InstructionPanel() {
-	
+		super(new BorderLayout());
 
 		try {
 		  GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
@@ -25,8 +37,8 @@ public class InstructionPanel extends JPanel{
 		  e.printStackTrace();
 		}
 
-		//this.add(createTopPanel(), BorderLayout.NORTH);
-		//this.add(createCenterPanel(), BorderLayout.CENTER);
+		this.add(createTopPanel(), BorderLayout.NORTH);
+		this.add(createCenterPanel(), BorderLayout.CENTER);
 	}
 
 	public JPanel createCenterPanel() {
@@ -34,7 +46,7 @@ public class InstructionPanel extends JPanel{
 		centerPanel.setBackground(Color.BLACK);
 
 		font = font.deriveFont(Font.PLAIN, 18);
-		objective = new JLabel("<html><div style=\"text-align: center;\"><br><br><h2 style=\"font-size: 20px;\">GOAL</h2> Be able to kill the boss while maintaining a considerable amount of health points. You should be able to overcome all three levels while earning loots from the defeated cows. <br><br><br><h2 style=\"font-size: 20px;\">POINT SYSTEM</h2>Here are the corresponding points for different opponent cows: <br><br> 100 points - BLUE COWS <br>300 points - ORANGE COWS <br>500 points - RED COWS<br><br><br><h2 style=\"font-size: 20px;\">ADDITIONAL RULES </h2>You will encounter different cows depending on what level you are currently playing. Defeated cows will produce loots that you can collect to earn more health points.<br><h2 style=\"font-size: 20px;\">PLAYER MOVEMENT</h2>The player may opt to use arrow keys for the movement. UP, DOWN, LEFT, RIGHT keys respectively.<br>Use the SPACEBAR to shoot cows and E for continuous shooting.</div></html>"); 
+		objective = new JLabel("<html><div style=\"text-align: center;\"><br><br><h2 style=\"font-size: 20px;\">GOAL</h2>Earn more points by killing alien cows and defeat the final boss while maintaining stable health points. <br><br><br><h2 style=\"font-size: 20px;\">POINT SYSTEM</h2>Here are the corresponding points for each cow in the game: <br><br> 100 points - blue cow<br>200 points - orange<br>500 points - red cow<br><br><br><h2 style=\"font-size: 20px;\">ADDITIONAL REMINDERS</h2> Getting loots from defeated cows means extra health points for the player <br> Once the three lives are consumed, the player loses the game. On the other hand, if the player defeats the final boss, the player wins.<br><br> <h2 style=\"font-size: 20px;\">PLAYER MOVEMENT<h2><br>The player can use arroy kews for the player movement namely LEFT, RIGHT, UP and DOWN arrow keys. <br>SPACEBAR is used for shooting alien cows. While E for continuous shooting. <br><br> </div></html>"); 
 		objective.setFont(font);
 		objective.setForeground(Color.WHITE);
 
@@ -68,5 +80,4 @@ public class InstructionPanel extends JPanel{
 	public JButton getBackButton() {
 		return this.backButton;
 	}
-
 }
