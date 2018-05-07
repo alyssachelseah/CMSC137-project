@@ -14,6 +14,7 @@ public class BossEnemy extends GameObject{
 	private int x = 0, y = 0;
 	private int speed = 30, attackspeed = 2500;
 	private int health = 500;
+	private int damage = 1;
 	private Random random = new Random();
 	private boolean cooldown = false;
 	
@@ -37,7 +38,7 @@ public class BossEnemy extends GameObject{
 		
 		if(x + 96 >= Game.WIDTH) {
 			velX = -2;
-		} else if (x - 96 <= 0) {
+		} else if (x <= 0) {
 			velX = 2;
 		} else if (y + 96 >= Game.HEIGHT) {
 			velY = -speed + 10;
@@ -46,20 +47,31 @@ public class BossEnemy extends GameObject{
 		}
 		
 		if(random.nextInt(500) <= 30 && isCooldown() == false) {
+			
 			velY = speed;
 			cooldown();
 		}
 		
 		if(health <= 300) {
-			speed+=10;
+			speed=40;
+			damage=3;
 		}
 	}
+	
+	
 	public void render(Graphics g) {
 		ImageIcon boss = new ImageIcon("./src/img/boss.png"); // load the image to a imageIcon
 		Image image = boss.getImage(); // transform it 
 		Image newimg = image.getScaledInstance(100, 100,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
 		boss = new ImageIcon(newimg);
 		g.drawImage(boss.getImage(),x,y,null);
+		
+		g.setColor(Color.gray);
+		g.fillRect((Game.WIDTH)/2 - 250, Game.HEIGHT - 25, 500, 25);
+		g.setColor(Color.red);
+		g.fillRect((Game.WIDTH)/2 - 250, Game.HEIGHT - 25, health, 25);
+		g.setColor(Color.white);
+		g.drawRect(Game.WIDTH/2 - 250, Game.HEIGHT - 25, 500, 25);
 
 	}
 	
@@ -83,5 +95,9 @@ public class BossEnemy extends GameObject{
 	
 	public void damage(int damage) {
 		this.health -= damage;
+	}
+	
+	public int getDamage() {
+		return this.damage;
 	}
 }

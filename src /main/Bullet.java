@@ -5,13 +5,17 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.LinkedList;
 
+import javax.swing.JOptionPane;
+
 public class Bullet extends GameObject{
 	
 	Handler handler;
 	private int damage;
+	private String name;
 	
-	public Bullet(int x, int y, ID id, Handler handler, int damage) {
+	public Bullet(String name, int x, int y, ID id, Handler handler, int damage) {
 		super(x, y, id);
+		this.name = name;
 		this.handler = handler;
 		this.damage = damage;
 		velY = 15;
@@ -46,10 +50,13 @@ public class Bullet extends GameObject{
 						int score;
 						
 						handler.removeObject(bEnemy);
-//						score = HUD.getScore() + 100;
-//						
-//						HUD.setScore(score);
-					} 
+						
+					}
+					
+
+					if(getName().equals("Player1")) {
+						HUD.SCORE += 10;
+					}
 				}
 			}
 			
@@ -59,9 +66,22 @@ public class Bullet extends GameObject{
 					BossEnemy bEnemy = (BossEnemy)tempObject;
 					bEnemy.damage(this.damage);
 					
-					if(bEnemy.getHealth() <= 0) handler.removeObject(bEnemy);
+					if(bEnemy.getHealth() <= 0) {
+						handler.removeObject(bEnemy);
+						JOptionPane.showMessageDialog(null, "YOU WON!");
+					} 
+					
+
+					if(getName().equals("Player1")) {
+						HUD.SCORE += 20;
+					}
+					
 				}
 			}
 		}
+	}
+	
+	public String getName() {
+		return name;
 	}
 }

@@ -25,8 +25,8 @@ public class Game extends Canvas implements Runnable{
 		spawner = new Spawn(handler, hud);
 		r = new Random();
 //		handler.addObject(new Player(r.nextInt(WIDTH), r.nextInt(HEIGHT), ID.Player));
-		handler.addObject(new Player(400, 600, ID.Player, handler));
-		handler.addObject(new Player(600, 600, ID.Player2, handler));
+		handler.addObject(new Player(500, 600, ID.Player, handler));
+//		handler.addObject(new Player(600, 600, ID.Player2, handler));
 		
 		for(int i = 0; i < 20; i++) {
 			int space = i * 140;

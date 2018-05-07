@@ -4,6 +4,7 @@ import java.awt.*;
 import java.util.*;
 
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 public class Player extends GameObject{
 	
@@ -40,6 +41,10 @@ public class Player extends GameObject{
 			if(tempObject.getId() == ID.BasicEnemy) {
 				if(getBounds().intersects(tempObject.getBounds())) {
 					//collision code
+					BasicEnemy bEnemy = (BasicEnemy)tempObject;
+					bEnemy.reduceHealth();
+					if(bEnemy.getHealth() <= 0) handler.removeObject(bEnemy);
+					
 					if(!isDamageCooldown()) {
 						HUD.HEALTH -= 1;
 						damageCooldown();
@@ -47,13 +52,19 @@ public class Player extends GameObject{
 				}
 			}
 			
-			if(tempObject.getId() == ID.BasicEnemy){
+			if(tempObject.getId() == ID.BossEnemy){
 				if(getBounds().intersects(tempObject.getBounds())){
-					BasicEnemy bEnemy = (BasicEnemy)tempObject;
-					bEnemy.reduceHealth();
-					
-					if(bEnemy.getHealth() <= 0) handler.removeObject(bEnemy);
+					BossEnemy boss = (BossEnemy) tempObject;
+					if(!isDamageCooldown()) {
+						HUD.HEALTH -= boss.getDamage();
+						damageCooldown();
+					}
 				}
+			}
+			
+			if(HUD.HEALTH <= 0) {
+				JOptionPane.showMessageDialog(null, "GAME OVER!");
+				handler.removeObject(this);
 			}
 		}
 	}

@@ -19,26 +19,26 @@ public class KeyInput extends KeyAdapter{
 			
 			if(tempObject.getId() == ID.Player) {
 				Player tempShip = (Player) tempObject;
-				if(key == KeyEvent.VK_W) tempObject.setVelY(-5);
-				if(key == KeyEvent.VK_S) tempObject.setVelY(5);
-				if(key == KeyEvent.VK_D) tempObject.setVelX(5);
-				if(key == KeyEvent.VK_A) tempObject.setVelX(-5);
-				if(key == KeyEvent.VK_SPACE) if(!tempShip.isBulletCoolDown()){
-					handler.addObject(new Bullet(tempShip.getX()+25,tempShip.getY(),ID.Bullet, handler, tempShip.getDamage()));
-					tempShip.bulletCooldown();
-				}
-			}
-			if(tempObject.getId() == ID.Player2) {
-				Player tempShip = (Player) tempObject;
 				if(key == KeyEvent.VK_UP) tempObject.setVelY(-5);
 				if(key == KeyEvent.VK_DOWN) tempObject.setVelY(5);
 				if(key == KeyEvent.VK_RIGHT) tempObject.setVelX(5);
 				if(key == KeyEvent.VK_LEFT) tempObject.setVelX(-5);
 				if(key == KeyEvent.VK_SPACE) if(!tempShip.isBulletCoolDown()){
-					handler.addObject(new Bullet(tempShip.getX()+25,tempShip.getY(),ID.Bullet, handler, tempShip.getDamage()));
+					handler.addObject(new Bullet("Player1",tempShip.getX()+25,tempShip.getY(),ID.Bullet, handler, tempShip.getDamage()));
 					tempShip.bulletCooldown();
 				}
 			}
+//			if(tempObject.getId() == ID.Player2) {
+//				Player tempShip = (Player) tempObject;
+//				if(key == KeyEvent.VK_W) tempObject.setVelY(-5);
+//				if(key == KeyEvent.VK_S) tempObject.setVelY(5);
+//				if(key == KeyEvent.VK_D) tempObject.setVelX(5);
+//				if(key == KeyEvent.VK_A) tempObject.setVelX(-5);
+//				if(key == KeyEvent.VK_SHIFT) if(!tempShip.isBulletCoolDown()){
+//					handler.addObject(new Bullet("Player2",tempShip.getX()+25,tempShip.getY(),ID.Bullet, handler, tempShip.getDamage()));
+//					tempShip.bulletCooldown();
+//				}
+//			}
 		}
 		if(key == KeyEvent.VK_ESCAPE) System.exit(1);
 	}
@@ -50,17 +50,17 @@ public class KeyInput extends KeyAdapter{
 			GameObject tempObject = handler.object.get(i);
 			
 			if(tempObject.getId() == ID.Player) {
-				if(key == KeyEvent.VK_W) tempObject.setVelY(0);
-				if(key == KeyEvent.VK_S) tempObject.setVelY(0);
-				if(key == KeyEvent.VK_D) tempObject.setVelX(0);
-				if(key == KeyEvent.VK_A) tempObject.setVelX(0);
-			}
-			if(tempObject.getId() == ID.Player2) {
 				if(key == KeyEvent.VK_UP) tempObject.setVelY(0);
 				if(key == KeyEvent.VK_DOWN) tempObject.setVelY(0);
 				if(key == KeyEvent.VK_RIGHT) tempObject.setVelX(0);
 				if(key == KeyEvent.VK_LEFT) tempObject.setVelX(0);
 			}
+//			if(tempObject.getId() == ID.Player2) {
+//				if(key == KeyEvent.VK_W) tempObject.setVelY(0);
+//				if(key == KeyEvent.VK_S) tempObject.setVelY(0);
+//				if(key == KeyEvent.VK_D) tempObject.setVelX(0);
+//				if(key == KeyEvent.VK_A) tempObject.setVelX(0);
+//			}
 		}
 	}	
 	

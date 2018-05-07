@@ -5,8 +5,7 @@ import java.awt.*;
 public class HUD{
 
 	public static int HEALTH = 5;
-	
-	private int score = 0;
+	public static int SCORE = 0;
 	private static int level = 1;
 	
 	public void tick() {
@@ -21,17 +20,17 @@ public class HUD{
 		g.setColor(Color.white);
 		g.drawRect(15, 15, 200, 32);
 	
-		g.drawString("Score: " + score, 15, 64);
+		g.drawString("Score: " + SCORE, 15, 64);
 		g.drawString("Level: " + level, 15, 80);
 	} 
 	
-	public void setScore(int score) {
-		this.score = score;
-	}
-	
-	public int getScore() {
-		return score;
-	}
+//	public void addScore(int score) {
+//		this.score= score;
+//	}
+//	
+//	public int getScore() {
+//		return score;
+//	}
 	
 	public int getLevel() {
 		return level;
