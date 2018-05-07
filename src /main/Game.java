@@ -20,7 +20,7 @@ public class Game extends Canvas implements Runnable{
 		handler = new Handler();
 		this.addKeyListener(new KeyInput(handler));
 		
-		new Window(WIDTH, HEIGHT, "Alien Cows", this);
+		new Window();
 	
 		hud = new HUD();
 		spawner = new Spawn(handler, hud);
