@@ -1,7 +1,6 @@
 package main;
 
 import java.awt.*;
-import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.util.Random;
 
@@ -29,12 +28,9 @@ public class Game extends Canvas implements Runnable{
 		handler.addObject(new Player(400, 600, ID.Player, handler));
 		handler.addObject(new Player(600, 600, ID.Player2, handler));
 		
-		//add enemies
-		handler.addObject(new BossEnemy((Game.WIDTH / 2) - 48, -100, ID.BossEnemy, handler));
-		
-		for(int i = 0; i < 50; i++) {
-			int space = i * 70;
-			handler.addObject(new BasicEnemy(30 + space, 50, ID.BasicEnemy, handler));
+		for(int i = 0; i < 20; i++) {
+			int space = i * 140;
+			handler.addObject(new BasicEnemy(30 + space, 50, ID.BasicEnemy, handler, Color.yellow, 1, "./src/img/cow.png"));
 		}
 	}
 	

@@ -8,15 +8,17 @@ import java.util.LinkedList;
 public class Bullet extends GameObject{
 	
 	Handler handler;
+	private int damage;
 	
-	public Bullet(int x, int y, ID id, Handler handler) {
+	public Bullet(int x, int y, ID id, Handler handler, int damage) {
 		super(x, y, id);
 		this.handler = handler;
-		velY = 10;
+		this.damage = damage;
+		velY = 15;
 	}
 	
 	public Rectangle getBounds() {
-		return new Rectangle(x, y, 10, 10);
+		return new Rectangle(x, y, 7, 20);
 	}
 	
 	public void tick(LinkedList<GameObject> object) {
@@ -27,7 +29,7 @@ public class Bullet extends GameObject{
 	
 	public void render(Graphics g) {
 		g.setColor(Color.orange);
-		g.fillRect(x, y, 10, 10);
+		g.fillRect(x, y, 7, 20);
 	}
 	
 	public void collision(LinkedList<GameObject> object){
@@ -38,26 +40,24 @@ public class Bullet extends GameObject{
 				if(getBounds().intersects(tempObject.getBounds())){
 					handler.removeObject(this);
 					BasicEnemy bEnemy = (BasicEnemy)tempObject;
+					bEnemy.reduceHealth();
 					
-					handler.removeObject(bEnemy);
+					if(bEnemy.getHealth() <= 0) {
+						int score;
+						
+						handler.removeObject(bEnemy);
+//						score = HUD.getScore() + 100;
+//						
+//						HUD.setScore(score);
+					} 
 				}
 			}
 			
-			if(tempObject.getId() == ID.Enemy2){
+			if(tempObject.getId() == ID.BossEnemy){
 				if(getBounds().intersects(tempObject.getBounds())){
 					handler.removeObject(this);
-					Enemy2 bEnemy = (Enemy2)tempObject;
-					bEnemy.reduceHealth();
-					
-					if(bEnemy.getHealth() <= 0) handler.removeObject(bEnemy);
-				}
-			}
-			
-			if(tempObject.getId() == ID.Enemy3){
-				if(getBounds().intersects(tempObject.getBounds())){
-					handler.removeObject(this);
-					Enemy3 bEnemy = (Enemy3)tempObject;
-					bEnemy.reduceHealth();
+					BossEnemy bEnemy = (BossEnemy)tempObject;
+					bEnemy.damage(this.damage);
 					
 					if(bEnemy.getHealth() <= 0) handler.removeObject(bEnemy);
 				}
